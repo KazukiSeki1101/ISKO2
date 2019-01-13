@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.CartBean;
+import bean.KensakuBean;
+import dao.DAOException;
+import dao.KensakuDAO;
+
 @WebServlet("/CartServlet")
 public class CartServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
@@ -36,8 +41,8 @@ public class CartServlet extends HttpServlet {
 					session.setAttribute("cart", cart);
 				}
 				// 商品コードの商品を取得する
-				ItemDAO dao = new ItemDAO();
-				ItemBean bean = dao.findByPrimayKey(code);
+				KensakuDAO dao = new KensakuDAO();
+				KensakuBean bean = dao.findByPrimayKey(code);
 				// カートに追加する
 				cart.addCart(bean, quantity);
 				gotoPage(request, response, "/cart.jsp");

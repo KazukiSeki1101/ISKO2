@@ -5,18 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CartBean {
-	private Map<Integer, ItemBean> items = new HashMap<Integer, ItemBean>();
+	private Map<Integer, KensakuBean> items = new HashMap<Integer, ItemBean>();
 	private int total;
 
 	public CartBean() {
 	}
 
-	public Map<Integer, ItemBean> getItems() {
+	public Map<Integer, KensakuBean> getItems() {
 		return items;
 	}
 
-	public void addCart(ItemBean bean, int nums) {
-		ItemBean item = (ItemBean) items.get(new Integer(bean.getCode()));
+	public void addCart(KensakuBean bean, int nums) {
+		KensakuBean item = (KensakuBean) items.get(new Integer(bean.getCode()));
 		if (item == null) {
 			bean.setQuantity(nums);
 			items.put(new Integer(bean.getCode()), bean);
@@ -37,8 +37,8 @@ public class CartBean {
 
 	private void recalcTotal() {
 		total = 0;
-		Collection<ItemBean> list = items.values();
-		for (ItemBean item : list) {
+		Collection<KensakuBean> list = items.values();
+		for (KensakuBean item : list) {
 			total += item.getPrice() * item.getQuantity();
 		}
 	}
