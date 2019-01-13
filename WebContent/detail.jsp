@@ -16,8 +16,13 @@
 <p>出版社：${items.publisher}</p>
 <p>カテゴリー：${items.category}</p>
 <p>おすすめ：${items.recommend}</p>
-[検索結果へ戻る]<br>
-[カートに入れる]<br>
+<form action="/ISKO2/BookServlet" method="post">
+	<input type="submit" value="検索結果へ戻る">
+</form>
+
+<form action="/ISKO2/CartServlet?action=add" method="post">
+	<input type="submit" value="カートに入れる">
+</form>
 
 </body>
 </html>
