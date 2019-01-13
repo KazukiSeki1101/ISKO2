@@ -39,7 +39,7 @@ public class ListServlet extends HttpServlet {
 				int categoryCode = Integer.parseInt(request.getParameter("code"));
 				ItemDAO dao = new ItemDAO();
 				List<ItemBean> list = dao.findByCategory(categoryCode);
-				// Listをリクエストスコープに入れてJSPへフォーワードする
+				
 				request.setAttribute("items", list);
 				gotoPage(request, response, "/list.jsp");
 			} else {
