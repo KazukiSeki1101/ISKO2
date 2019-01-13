@@ -34,13 +34,12 @@ public class BookServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			String action = request.getParameter("action");
 
-			dao.KensakuDAO dao = new KensakuDAO();
+			KensakuDAO dao = new KensakuDAO();
 			// 検索内容未入力の場合は全表示
 			if (action == null || action.length() == 0) {
 				List<KensakuBean> list = dao.findAll();
 				request.setAttribute("items", list);
-				RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
-				rd.forward(request, response);
+				gotoPage(request, response, "/result.jsp");
 
 				// 検索したい内容をdao.searchbookへ送る
 			} else if (action.equals("search")) {
@@ -52,7 +51,7 @@ public class BookServlet extends HttpServlet {
 
 				dao.searchBook(title, author, publisher, category, recommend);
 
-				List<KensakuBean> list = dao.findAll();
+				List<KensakuBean> list = dao.searchBook(title, author, publisher, category, recommend);
 				request.setAttribute("items", list);
 				gotoPage(request, response, "/result.jsp");
 			}
