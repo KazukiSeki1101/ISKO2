@@ -36,8 +36,7 @@ public class LoginServlet extends HttpServlet {
 				LoginDAO dao = new LoginDAO();
 				if(dao.validation(id, pw)){
 					HttpSession session = request.getSession(true);
-					session.setAttribute("login", "success");
-					request.setAttribute("id", id);
+					session.setAttribute("id", id);
 					gotoPage(request, response, "/top.jsp");
 				} else {
 					request.setAttribute("message", "ログインに失敗しました");
