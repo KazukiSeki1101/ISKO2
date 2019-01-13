@@ -56,7 +56,6 @@ public class KensakuDAO {
 			}
 		}
 
-
 	public List<KensakuBean> searchBook(String title, String author, String publisher, String category,
 			String recommend) throws DAOException {
 		if (con == null) 
