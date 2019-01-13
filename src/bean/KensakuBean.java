@@ -11,7 +11,7 @@ public class KensakuBean implements Serializable {
 	private String category;
 	private String recommend;
 
-	public KensakuBean(int code,String title, Integer price, String author, String publisher, String category,
+	public KensakuBean(int code, String title, int price, String author, String publisher, String category,
 			String recommend) {
 		this.code=code;
 		this.title = title;
@@ -27,12 +27,6 @@ public class KensakuBean implements Serializable {
 	}
 
 	public KensakuBean(String title, int price) {
-		this.title = title;
-		this.price = price;
-	}
-
-	public KensakuBean(int code, String title, int price) {
-		this.code = code;
 		this.title = title;
 		this.price = price;
 	}

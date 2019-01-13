@@ -115,7 +115,7 @@ public class KensakuDAO {
 					String publisher2=rs.getString("publisher");
 					String category2=rs.getString("category");
 					String recommend2=rs.getString("recommend");
-					KensakuBean bean = new KensakuBean(code2,title2,price2);
+					KensakuBean bean = new KensakuBean(code2,title2,price2,author2,publisher2,category2,recommend2);
 					list.add(bean);
 				}
 				return list;
