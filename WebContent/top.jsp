@@ -28,6 +28,5 @@
 <option value="4">おすすめ4の名前</option>
 </select>
 </form>
-
 </body>
 </html>
