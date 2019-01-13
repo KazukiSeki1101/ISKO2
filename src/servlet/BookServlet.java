@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.KensakuBean;
-import hinan.DAOException;
-import hinan.KensakuDAO;
+import dao.DAOException;
+import dao.KensakuDAO;
 
 import java.util.List;
 

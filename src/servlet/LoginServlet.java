@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import hinan.LoginDAO;
+import dao.LoginDAO;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -36,8 +36,7 @@ public class LoginServlet extends HttpServlet {
 				LoginDAO dao = new LoginDAO();
 				if(dao.validation(id, pw)){
 					HttpSession session = request.getSession(true);
-					session.setAttribute("login", "success");
-					request.setAttribute("id", id);
+					session.setAttribute("id", id);
 					gotoPage(request, response, "/top.jsp");
 				} else {
 					request.setAttribute("message", "ログインに失敗しました");
