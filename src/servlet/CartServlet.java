@@ -1,4 +1,4 @@
-package Servlet;
+package servlet;
 
 import java.io.IOException;
 
@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Servlet implementation class CartServlet
- */
 @WebServlet("/CartServlet")
 public class CartServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
