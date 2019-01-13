@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.KensakuBean;
-import hinan.DAOException;
+import dao.DAOException;
 
 public class KensakuDAO {
 	private Connection con;

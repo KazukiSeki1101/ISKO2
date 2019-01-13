@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import hinan.LoginDAO;
+import dao.LoginDAO;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {

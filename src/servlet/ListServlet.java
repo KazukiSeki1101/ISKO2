@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.KensakuDAO;
+import bean.KensakuBean;
 
 @WebServlet("/ListServlet")
 public class ListServlet extends HttpServlet {
@@ -24,9 +28,8 @@ public class ListServlet extends HttpServlet {
 			if (action == null || action.length() == 0 || action.equals("")) {
 				gotoPage(request, response, ".jsp");
 			} else if (action.equals("list")) {
-				int categoryCode = Integer.parseInt(request.getParameter("code"));
-				ItemDAO dao = new ItemDAO();
-				List<ItemBean> list = dao.findByCategory(categoryCode);
+				KensakuDAO dao = new KensakuDAO();
+				List<KensakuBean> list = dao.searchBook("","","","","");
 				// Listをリクエストスコープに入れてJSPへフォーワードする
 				request.setAttribute("items", list);
 				gotoPage(request, response, "/list.jsp");
