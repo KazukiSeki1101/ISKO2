@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.KensakuBean;
+import hinan.DAOException;
+import hinan.KensakuDAO;
 
 import java.util.List;
-import dao.KensakuDAO;
-import dao.DAOException;
 
 /**
  * Servlet implementation class BookServlet
