@@ -4,7 +4,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>ISKO MANGA</title>
+<title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/Login.html" action="page"></jsp:include>
