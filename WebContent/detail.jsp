@@ -10,12 +10,15 @@
 <body>
 
 <jsp:include page="/LoginPage.jsp"/>
+<p>商品画像<p>
 
-<p>商品名：${items.title2}</p>
-<p>作者：${items.author2}</p>
-<p>出版社：${items.publisher2}</p>
-<p>カテゴリー：${items.category}2</p>
-<p>おすすめ：${items.recommend2}</p>
+<p>商品名：${items.title}</p>
+<p>作者：${items.author}</p>
+<p>出版社：${items.publisher}</p>
+<p>カテゴリー：${items.category}</p>
+<p>おすすめ：${items.recommend}</p>
+
+
 <form action="/ISKO2/BookServlet" method="post">
 	<input type="submit" value="検索結果へ戻る">
 </form>

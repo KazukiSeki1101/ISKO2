@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class LoginDAO {
+	
 	private Connection con;
 	
 	public LoginDAO() throws Exception {

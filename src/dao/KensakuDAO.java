@@ -120,13 +120,13 @@ public class KensakuDAO {
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
-					String title2 = rs.getString("title");
-					int price2 = rs.getInt("price");
-					String author2=rs.getString("author");
-					String publisher2=rs.getString("publisher");
-					String category2=rs.getString("category");
-					String recommend2=rs.getString("recommended");
-					KensakuBean bean = new KensakuBean(title2,price2,author2,publisher2,category2,recommend2);
+					String title = rs.getString("title");
+					int price = rs.getInt("price");
+					String author=rs.getString("author");
+					String publisher=rs.getString("publisher");
+					String category=rs.getString("category");
+					String recommend=rs.getString("recommended");
+					KensakuBean bean = new KensakuBean(title,price,author,publisher,category,recommend);
 					list.add(bean);
 				}
 				return list;
