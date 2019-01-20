@@ -26,7 +26,8 @@ public class KensakuBean implements Serializable {
 
 	}
 
-	public KensakuBean(String title, int price) {
+	public KensakuBean(int code, String title, int price) {
+		this.code = code;
 		this.title = title;
 		this.price = price;
 	}

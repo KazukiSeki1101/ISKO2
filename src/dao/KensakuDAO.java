@@ -31,9 +31,10 @@ public class KensakuDAO {
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
+					int code2 = rs.getInt("code");
 					String title2 = rs.getString("title");
 					int price2 = rs.getInt("price");
-					KensakuBean bean = new KensakuBean(title2, price2);
+					KensakuBean bean = new KensakuBean(code2, title2, price2);
 					list.add(bean);
 				}
 				// git変更テスト
@@ -69,9 +70,10 @@ public class KensakuDAO {
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
+					int code2 = rs.getInt("code");
 					String title2 = rs.getString("title");
 					int price2 = rs.getInt("price");
-					KensakuBean bean = new KensakuBean(title2,price2);
+					KensakuBean bean = new KensakuBean(code2, title2,price2);
 					list.add(bean);
 				}
 				return list;

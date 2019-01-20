@@ -9,12 +9,9 @@
 <title>商品検索結果一覧</title>
 </head>
 <body>
-<jsp:include page="/LoginPage.jsp">
-
-
+<jsp:include page="/LoginPage.jsp"/>
 <c:forEach items="${items}" var="item">
-商品名：<a href="/ListServlet?action=detail&item_code=${item.code}"><b>${item.name}</b></a><br>
-
+商品名：<a href="/ListServlet?action=detail&item_code=${item.code}"><b>${item.title}</b></a><br>
 価格：<b>${item.price}</b><br>
 </c:forEach>
 </body>

@@ -20,20 +20,24 @@
 		<p>作者</p>
 		<input type="text" name="author"><br>
 		<p>出版社</p>
-		<input type="text" name="publisher"><br> <select
-			name="category_name">
+		<input type="text" name="publisher"><br>
+		<select name="category_name">
+			<option value="">雑誌を選んでください</option>
 			<option value="1">ジャンプ</option>
 			<option value="2">マガジン</option>
 			<option value="3">サンデー</option>
 			<option value="4">スピリッツ</option>
-		</select> <br> <select name="recommend_code">
+		</select><br>
+		<select name="recommend_code">
+			<option value="">おすすめジャンルを選んでください</option>
 			<option value="1">王道系マンガ！</option>
 			<option value="2">バイオレンス×ヤクザで新境地マンガ！</option>
 			<option value="3">週末に冒険したくなったらこれマンガ！</option>
 			<option value="4">2019年に流行るスポーツマンガ！</option>
 			<option value="5">ファッション好きに進めたいオサレなマンガ！</option>
-		</select> <br> <input type="submit" value="検索"> <input
-			type="hidden" name="action" value="search">
+		</select><br>
+		<input type="submit" value="検索">
+		<input type="hidden" name="action" value="search">
 	</form>
 </body>
 </html>
