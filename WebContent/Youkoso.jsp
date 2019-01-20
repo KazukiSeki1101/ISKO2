@@ -7,8 +7,8 @@
 <title>Youkoso</title>
 </head>
 <body>
+<img src="https://haishin.ebookjapan.jp/contents/special/image/st/kanban/190118kininaru_790.jpg">
 
-<h1>!! ようこそISKOMANGAへ !!</h1>
-
+<h1>!! ようこそISKO MANGAへ !!</h1>
 </body>
 </html>
