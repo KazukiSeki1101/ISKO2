@@ -10,8 +10,6 @@
 </head>
 <body>
 <jsp:include page="/LoginPage.jsp">
-
-
 <c:forEach items="${items}" var="item">
 <form action="/CartServlet?action=add" method="post">
 <input type ="hidden" name="item_code">
@@ -21,6 +19,5 @@
 <input type="submit" value="カートに入れる">
 </form>
 </c:forEach>
-
 </body>
 </html>
