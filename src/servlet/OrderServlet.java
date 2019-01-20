@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.CartBean;
+import dao.OrderDAO;
+
 /**
  * Servlet implementation class OrderServlet
  */
@@ -59,7 +62,7 @@ public class OrderServlet extends HttpServlet {
 		}else { //actionの値が不正
 			request.setAttribute("messege","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
-		}catch(DAOException) {
+		}catch(DAOException e){
 			e.pringStackTrace();
 			request.setAttribute("messeage","内部エラーが発生しました。");
 			gotoPage(request,response,"errInternal.jsp");
@@ -68,7 +71,7 @@ public class OrderServlet extends HttpServlet {
 	}
 
 	private void gotoPage(HttpServletRequest request,HttpServletResponse response,String page)throws ServletException,IOException{
-		RequestDispatcher rd = request.getRequestDispather(page);
+		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request,response);
 	}
 

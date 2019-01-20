@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +39,11 @@ public class BuyServlet extends HttpServlet {
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/errInternal.jsp");
 		}
+	}
+	
+	private void gotoPage(HttpServletRequest request,HttpServletResponse response,String page)throws ServletException,IOException{
+		RequestDispatcher rd = request.getRequestDispatcher(page);
+		rd.forward(request,response);
 	}
 
 }

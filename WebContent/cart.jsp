@@ -25,7 +25,7 @@
 <tr>
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
-	<td align="right">${item.value.quantity}</td> //数量入力と計算
+	<td align="right">${item.value.quantity}</td> <%-- 数量入力と計算--%>
 	<td align="right">${item.value.price * item.value.quantity}円</td>
 <td>
 <form action="/ISKO2/CartServlet?action=delete" method="post">
