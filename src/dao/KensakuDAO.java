@@ -64,9 +64,10 @@ public class KensakuDAO {
 			PreparedStatement st = null;
 			ResultSet rs = null;
 			try {
-				String sql = "SELECT * FROM product WHERE title LIKE'title', author LIKE'author', publisher LIKE 'publisher', category, recommend FROM product";
+				String sql = "SELECT * FROM product WHERE title LIKE ?";
 				st = con.prepareStatement(sql);
 				rs = st.executeQuery();
+				st.setString(1, "%"+title+"%");
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
 					String title2 = rs.getString("title");
