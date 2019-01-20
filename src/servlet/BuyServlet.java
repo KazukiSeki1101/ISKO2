@@ -26,18 +26,11 @@ public class BuyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			
-			String action = request.getParameter("action");
-			
-			if (action == null || action.length() == 0 || action.equals("end")) {
-				gotoPage(request, response, "/buy.jsp");
-			
-			} 
-		} catch (DAOException e) {
-			e.printStackTrace();
-			request.setAttribute("message", "内部エラーが発生しました。");
-			gotoPage(request, response, "/errInternal.jsp");
+		String action = request.getParameter("action");
+		
+		if (action == null || action.length() == 0 || action.equals("end")) {
+			gotoPage(request, response, "/buy.jsp");
+		
 		}
 	}
 	

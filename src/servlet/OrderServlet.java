@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.CartBean;
+import dao.DAOException;
 import dao.OrderDAO;
 
 /**
@@ -50,7 +51,6 @@ public class OrderServlet extends HttpServlet {
 			if(action == null || action.length() == 0) {
 				request.setAttribute("message","正しく操作してください。");
 				gotoPage(request,response,"errInternal.jsp");
-			}
 
 			OrderDAO order = new OrderDAO();
 			int orderNumber = order.saveOrder(cart);
@@ -62,8 +62,9 @@ public class OrderServlet extends HttpServlet {
 		}else { //actionの値が不正
 			request.setAttribute("messege","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
-		}catch(DAOException e){
-			e.pringStackTrace();
+		}
+		} catch (DAOException e) {
+			e.printStackTrace();
 			request.setAttribute("messeage","内部エラーが発生しました。");
 			gotoPage(request,response,"errInternal.jsp");
 		}
