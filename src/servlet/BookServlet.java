@@ -13,7 +13,6 @@ import bean.KensakuBean;
 import dao.DAOException;
 import dao.KensakuDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/BookServlet")
@@ -36,18 +35,17 @@ public class BookServlet extends HttpServlet {
 				String title = request.getParameter("title");
 				String author = request.getParameter("author");
 				String publisher = request.getParameter("publisher");
-				String category = request.getParameter("category");
-				String recommend = request.getParameter("recommend");
+				String category = request.getParameter("category_name");
+				String recommend = request.getParameter("recommend_code");
 				
-				if(nullJudgement(title,author,publisher,category,recommend)){
-					// 検索したい内容をdao.searchbookへ送る
-					dao.searchBook(title, author, publisher, category, recommend);
-					List<KensakuBean> list = dao.searchBook(title, author, publisher, category, recommend);
+				if((title == null || title.length() == 0) && (author == null || author.length() == 0) && (publisher == null || publisher.length() == 0) && (category == null || category.length() == 0) && (recommend == null || recommend.length() == 0) ){
+					// 検索内容未入力の場合は全表示
+					List<KensakuBean> list = dao.findAll();
 					request.setAttribute("items", list);
 					gotoPage(request, response, "/result.jsp");
 				} else {
-					// 検索内容未入力の場合は全表示
-					List<KensakuBean> list = dao.findAll();
+					// 検索したい内容をdao.searchbookへ送る
+					List<KensakuBean> list = dao.searchBook(title, author, publisher, category, recommend);
 					request.setAttribute("items", list);
 					gotoPage(request, response, "/result.jsp");
 				}
@@ -65,19 +63,4 @@ public class BookServlet extends HttpServlet {
 		rd.forward(request, response);
 	}
 	
-	private boolean nullJudgement(String title, String author, String publisher, String category, String recommend){
-		List<String> argArray = new ArrayList<String>();
-		argArray.add(title);
-		argArray.add(author);
-		argArray.add(publisher);
-		argArray.add(category);
-		argArray.add(recommend);
-		for(String a : argArray){
-			if(a == null || a.length() == 0){
-				continue;
-			}
-			return true;
-		}
-		return false;
-	}
 }
