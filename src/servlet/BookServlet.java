@@ -13,51 +13,46 @@ import bean.KensakuBean;
 import dao.DAOException;
 import dao.KensakuDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Servlet implementation class BookServlet
- */
 @WebServlet("/BookServlet")
 public class BookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		try {
 			request.setCharacterEncoding("UTF-8");
 			String action = request.getParameter("action");
 
 			KensakuDAO dao = new KensakuDAO();
-			// 検索内容未入力の場合は全表示
+			
 			if (action == null || action.length() == 0) {
-				List<KensakuBean> list = dao.findAll();
-				request.setAttribute("items", list);
-				gotoPage(request, response, "/result.jsp");
-
-				// 検索したい内容をdao.searchbookへ送る
+				request.setAttribute("message", "表示できません");
+				gotoPage(request, response, "/errInternal.jsp");
 			} else if (action.equals("search")) {
 				String title = request.getParameter("title");
 				String author = request.getParameter("author");
 				String publisher = request.getParameter("publisher");
 				String category = request.getParameter("category");
 				String recommend = request.getParameter("recommend");
-
-				dao.searchBook(title, author, publisher, category, recommend);
-
-				List<KensakuBean> list = dao.searchBook(title, author, publisher, category, recommend);
-				request.setAttribute("items", list);
-				gotoPage(request, response, "/result.jsp");
+				
+				if(nullJudgement(title,author,publisher,category,recommend)){
+					// 検索したい内容をdao.searchbookへ送る
+					dao.searchBook(title, author, publisher, category, recommend);
+					List<KensakuBean> list = dao.searchBook(title, author, publisher, category, recommend);
+					request.setAttribute("items", list);
+					gotoPage(request, response, "/result.jsp");
+				} else {
+					// 検索内容未入力の場合は全表示
+					List<KensakuBean> list = dao.findAll();
+					request.setAttribute("items", list);
+					gotoPage(request, response, "/result.jsp");
+				}
 			}
-
 		} catch (DAOException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/result.jsp");
@@ -68,5 +63,21 @@ public class BookServlet extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
 		rd.forward(request, response);
+	}
+	
+	private boolean nullJudgement(String title, String author, String publisher, String category, String recommend){
+		List<String> argArray = new ArrayList<String>();
+		argArray.add(title);
+		argArray.add(author);
+		argArray.add(publisher);
+		argArray.add(category);
+		argArray.add(recommend);
+		for(String a : argArray){
+			if(a == null || a.length() == 0){
+				continue;
+			}
+			return true;
+		}
+		return false;
 	}
 }

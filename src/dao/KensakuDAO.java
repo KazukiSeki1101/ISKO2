@@ -31,9 +31,10 @@ public class KensakuDAO {
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
+					int code2 = rs.getInt("code");
 					String title2 = rs.getString("title");
 					int price2 = rs.getInt("price");
-					KensakuBean bean = new KensakuBean(title2, price2);
+					KensakuBean bean = new KensakuBean(code2, title2, price2);
 					list.add(bean);
 				}
 				// git変更テスト
@@ -63,15 +64,18 @@ public class KensakuDAO {
 
 			PreparedStatement st = null;
 			ResultSet rs = null;
+			//test
 			try {
-				String sql = "SELECT * FROM product WHERE title LIKE'title', author LIKE'author', publisher LIKE 'publisher', category, recommend FROM product";
+				String sql = "SELECT * FROM product WHERE title LIKE ?";
 				st = con.prepareStatement(sql);
 				rs = st.executeQuery();
+				st.setString(1, "%"+title+"%");
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
+					int code2 = rs.getInt("code");
 					String title2 = rs.getString("title");
 					int price2 = rs.getInt("price");
-					KensakuBean bean = new KensakuBean(title2,price2);
+					KensakuBean bean = new KensakuBean(code2, title2,price2);
 					list.add(bean);
 				}
 				return list;
