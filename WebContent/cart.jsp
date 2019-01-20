@@ -22,7 +22,7 @@
     <td>個数</td><td>小計</td><td>削除</td></tr>
 
 <c:forEach items="${cart.items}" var="item">
-<tr>	
+<tr>
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
 	<td align="right">${item.value.quantity}</td> //数量入力と計算
@@ -39,11 +39,11 @@
 </table>
 
 
-<form action="/ISKO2/BookServlet?action=input_search" method="post">
+<form action="/ISKO2/BookServlet?action=search" method="post">
 	<input type="submit" value="買い物を続ける">
 </form>
 
-<form action="/ISKO2/OrderServlet?action=input_order" method="post">
+<form action="/ISKO2/OrderServlet?action=order" method="post">
 	<input type="submit" value="注文する">
 </form>
 </c:if>

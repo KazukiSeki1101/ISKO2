@@ -23,7 +23,7 @@ public class CartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			// パラメータの解析
 			String action = request.getParameter("action");
@@ -72,18 +72,18 @@ public class CartServlet extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/errInternal.jsp");
-		}		
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
-	private void gotoPage(HttpServletResponse response,String page)throws ServletException,IOException{
+
+	private void gotoPage(HttpServletRequest request,HttpServletResponse response,String page)throws ServletException,IOException{
 		RequestDispatcher rd = request.getRequestDispather(page);
 		rd.forward(request,response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

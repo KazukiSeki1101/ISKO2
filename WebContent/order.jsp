@@ -34,7 +34,7 @@
 <input type="radio" name="pay" value="card">クレジットカード
 </form>
 
-<a href="/ISKO2/BuyServlet/?action=end" method="post">
+<a href="/ISKO2/buy.jsp" method="post">
 <input type="submit" value="確定">
 </a>
 
