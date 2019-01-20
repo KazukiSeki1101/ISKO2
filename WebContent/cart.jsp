@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<p align="right">さん、こんにちは</p><br>
+<p align="right">isko さん、こんにちは</p><br>
 <h3>現在のカートの中身</h3>
 
 <c:if test="${empty cart.items}">
@@ -25,8 +25,15 @@
 <tr>
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
-	<td align="right">1</td>
-	<td align="right">${item.value.price * 1}円</td>
+	<td align="right">
+	<select name="quantity">
+	<option value="1">1
+	<option value="2">2
+	<option value="3">3
+	<option value="4">4
+	<option value="5">5
+	</select></td>
+	<td align="right">${item.value.price * quantity}円</td>
 <td>
 <form action="/ISKO2/CartServlet?action=delete" method="post">
 	<input type="hidden" name="item_code" value="${item.value.code}">

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<p align="right">さん、こんにちは</p><br>
+<p align="right">isko さん、こんにちは</p><br>
 <h3>ご注文商品</h3>
 
 <c:if test="${not empty cart.items}">
@@ -20,8 +20,15 @@
 <tr>
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
-	<td align="right">1</td>
-	<td align="right">${item.value.price * 1}円</td>
+	<td align="right">
+	<select name="quantity">
+	<option value="1">1
+	<option value="2">2
+	<option value="3">3
+	<option value="4">4
+	<option value="5">5
+	</select></td>
+	<td align="right">${item.value.price * quantity}円</td>
 </tr>
 </c:forEach>
 <tr><td align="right" colspan="6">総計：${cart.total}円</td></tr>

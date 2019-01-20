@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h3>さん、以下の内容で注文が確定しました。</h3>
+<h3>isko さん、以下の内容で注文が確定しました。</h3>
 
 <p>お客様の注文番号は</p>
 <h3><font color="red">${orderNumber}</font></h3>

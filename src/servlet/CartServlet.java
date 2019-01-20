@@ -33,8 +33,7 @@ public class CartServlet extends HttpServlet {
 				gotoPage(request, response, "/cart.jsp");
 			// addはカートに追加処理
 			} else if (action.equals("add")) {
-				//int code = Integer.parseInt(request.getParameter("item_code"));
-				//int quantity = Integer.parseInt(request.getParameter("quantity"));
+				
 				HttpSession session = request.getSession(true);
 				CartBean cart = (CartBean) session.getAttribute("cart");
 				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
@@ -43,7 +42,7 @@ public class CartServlet extends HttpServlet {
 				}
 
 				// カートに追加する
-				cart.addCart(title, price);
+				cart.addCart(,);
 				gotoPage(request, response, "/cart.jsp");
 			// deleteはカートから削除処理
 			} else if (action.equals("delete")) {
