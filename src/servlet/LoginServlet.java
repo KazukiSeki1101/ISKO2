@@ -29,11 +29,14 @@ public class LoginServlet extends HttpServlet {
 			if(action.equals("page") || action == null || action.length() == 0){
 				//ログインページを表示
 				gotoPage(request, response, "/LoginPage.jsp");
+				
+				
 			} else if(action.equals("login")) {
 				//ログイン認証を実施
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");			
 				LoginDAO dao = new LoginDAO();
+			
 				if(dao.validation(id, pw)){
 					HttpSession session = request.getSession(true);
 					session.setAttribute("id", id);
@@ -42,11 +45,18 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("message", "ログインに失敗しました");
 					gotoPage(request, response, "/errInternal.jsp");
 				}
-			} else {
+			} else if(action.equals("logout")) {
+				HttpSession session = request.getSession(false);
+				if(session!=null) {
+				session.invalidate();
+				request.setAttribute("message", "ログアウトしました");
+				gotoPage(request, response, "/top.jsp");
+				}
+			}else {
 				//エラー（actionの値が不正）
 				request.setAttribute("message", "正しく操作してください");
 				gotoPage(request, response, "/errInternal.jsp");
-			}			
+			}		
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました");
