@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<jsp:include page="/LoginPage.jsp">
+<jsp:include page="/LoginPage.jsp"/>
 
 <p>商品名：${items.title}</p>
 <p>作者：${items.author}</p>
