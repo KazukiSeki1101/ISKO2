@@ -9,7 +9,7 @@
 <title>商品検索結果一覧</title>
 </head>
 <body>
-<jsp:include page="/LoginPage.jsp">
+<jsp:include page="/LoginPage.jsp"/>
 
 
 <c:forEach items="${items}" var="item">

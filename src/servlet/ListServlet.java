@@ -27,7 +27,7 @@ public class ListServlet extends HttpServlet {
 			KensakuDAO dao = new KensakuDAO();
 			
 			if (action == null || action.length() == 0 || action.equals("")) {
-				gotoPage(request, response, ".jsp");
+				gotoPage(request, response, "errInternal.jsp");
 			} else if (action.equals("list")) {
 				List<KensakuBean> list = dao.searchBook("","","","","");
 				// Listをリクエストスコープに入れてJSPへフォーワードする
