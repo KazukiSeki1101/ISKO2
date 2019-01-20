@@ -9,7 +9,7 @@
 <body>
 
 
-<h1>!! ISKO MANGA !!<h1>
+<h1>!! ISKO MANGA !!</h1>
 <br>
 <br>
 <br>
