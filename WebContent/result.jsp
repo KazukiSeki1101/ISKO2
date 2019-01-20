@@ -25,6 +25,8 @@
 価格：<b>${item.price}</b><br>
 
 <input type="submit" value="カートに入れる">
+</form>
 </c:forEach>
+
 </body>
 </html>
