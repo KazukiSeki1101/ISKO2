@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
 
 	<h1>ISKO MANGA</h1>
 	<h3>検索機能</h3>
@@ -31,5 +32,33 @@
 		</select> <br> <input type="submit" value="検索">
 		<input type="hidden" name="action" value="search">
 	</form>
+=======
+<jsp:include page="/LoginPage.jsp"/>
+<br>
+<br>
+<br>
+<br>
+<h1>ISKO MANGA</h1>
+<h3>検索機能</h3>
+<p>タイトル</p><input type="text" name="title"><br>
+<p>作者</p><input type="text" name="author"><br>
+<p>出版社</p><input type="text" name="publisher"><br>
+<form>
+<select name="category_name">
+<option value="1">ジャンプ</option>
+<option value="2">マガジン</option>
+<option value="3">サンデー</option>
+<option value="4">スピリッツ</option>
+</select>
+<br>
+<select name="recommend_code">
+<option value="1">王道系マンガ！</option>
+<option value="2">バイオレンス×ヤクザで新境地マンガ！</option>
+<option value="3">週末に冒険したくなったらこれマンガ！</option>
+<option value="4">2019年に流行るスポーツマンガ！</option>
+<option value="5">ファッション好きに進めたいオサレなマンガ！</option>
+</select>
+</form>
+>>>>>>> refs/heads/SyogoOgawa
 </body>
 </html>
