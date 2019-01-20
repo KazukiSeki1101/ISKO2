@@ -29,6 +29,7 @@
 			<option value="4">2019年に流行るスポーツマンガ！</option>
 			<option value="5">ファッション好きに進めたいオサレなマンガ！</option>
 		</select> <br> <input type="submit" value="検索">
+		<input type="hidden" name="action" value="search">
 	</form>
 </body>
 </html>
