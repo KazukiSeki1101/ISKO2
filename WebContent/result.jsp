@@ -11,8 +11,10 @@
 <body>
 <jsp:include page="/LoginPage.jsp">
 
+
 <c:forEach items="${items}" var="item">
-商品名：<a href="/ListServlet?detail=${item.code}"><b>${item.name}</b></a><br>
+商品名：<a href="/ListServlet?action=detail&item_code=${item.code}"><b>${item.name}</b></a><br>
+
 価格：<b>${item.price}</b><br>
 </c:forEach>
 </body>

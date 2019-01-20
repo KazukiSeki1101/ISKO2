@@ -24,14 +24,18 @@ public class ListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String action = request.getParameter("action");
+			KensakuDAO dao = new KensakuDAO();
 			
 			if (action == null || action.length() == 0 || action.equals("")) {
 				gotoPage(request, response, ".jsp");
 			} else if (action.equals("list")) {
-				KensakuDAO dao = new KensakuDAO();
 				List<KensakuBean> list = dao.searchBook("","","","","");
 				// Listをリクエストスコープに入れてJSPへフォーワードする
 				request.setAttribute("items", list);
+				gotoPage(request, response, "/list.jsp");
+			} else if (action.equals("detail")) {
+				String item_code = request.getParameter("item_code");
+				List<DetailBean> item_detail = dao.itemdetail(item_code);
 				gotoPage(request, response, "/list.jsp");
 			} else {
 				request.setAttribute("message", "正しく操作してください。");

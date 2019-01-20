@@ -21,6 +21,7 @@ public class LoginDAO {
 		
 		try{
 			String sql = "SELECT login_pw FROM login WHERE login_id = ?";
+
 			st = con.prepareStatement(sql);
 			st.setString(1, id);
 			rs = st.executeQuery();
