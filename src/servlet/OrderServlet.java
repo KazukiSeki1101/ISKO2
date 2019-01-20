@@ -52,7 +52,7 @@ public class OrderServlet extends HttpServlet {
 				request.setAttribute("message","正しく操作してください。");
 				gotoPage(request,response,"errInternal.jsp");
 
-			OrderDAO order = new OrderDAO();
+			//OrderDAO order = new OrderDAO();
 			int orderNumber = order.saveOrder(cart);
 			//注文後はセッション情報をクリアする
 			session.removeAttribute("cart");

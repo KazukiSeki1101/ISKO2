@@ -17,7 +17,7 @@
 
 <h3>ご注文ありがとうございました。</h3>
 
-<form action="/ISKO2/BookServlet" method="post">
+<form action="/ISKO2/top.jsp" method="post">
 <input type="submit" value="topページへ">
 </form>
 

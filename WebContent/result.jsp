@@ -9,10 +9,15 @@
 <title>商品検索結果一覧</title>
 </head>
 <body>
+
 <jsp:include page="/LoginPage.jsp"/>
 <c:forEach items="${items}" var="item">
 商品名：<a href="/ListServlet?action=detail&item_code=${item.code}"><b>${item.title}</b></a><br>
+
 価格：<b>${item.price}</b><br>
+
+<input type="submit" value="カートに入れる">
+</form>
 </c:forEach>
 </body>
 </html>
