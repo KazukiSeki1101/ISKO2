@@ -11,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.CartBean;
-import dao.DAOException;
-import dao.OrderDAO;
+
 
 /**
  * Servlet implementation class OrderServlet
@@ -43,31 +42,24 @@ public class OrderServlet extends HttpServlet {
 			return;
 		}
 
-		try {
+		//パラメータ解析
+		String action = request.getParameter("action");
 
-			//パラメータ解析
-			String action = request.getParameter("action");
-
-			if(action == null || action.length() == 0) {
-				request.setAttribute("message","正しく操作してください。");
-				gotoPage(request,response,"errInternal.jsp");
-
-			//OrderDAO order = new OrderDAO();
-			int orderNumber = order.saveOrder(cart);
-			//注文後はセッション情報をクリアする
-			session.removeAttribute("cart");
-			//注文番号をクライアントへ送る
-			request.setAttribute("orderNumber",new Integer(orderNumber));
-			gotoPage(request,response,"/order.jsp");
-		}else { //actionの値が不正
-			request.setAttribute("messege","正しく操作してください。");
+		if(action == null || action.length() == 0) {
+			request.setAttribute("message","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
-		}
-		} catch (DAOException e) {
-			e.printStackTrace();
-			request.setAttribute("messeage","内部エラーが発生しました。");
-			gotoPage(request,response,"errInternal.jsp");
-		}
+
+		int orderNumber = 1;
+		orderNumber++;
+		//注文後はセッション情報をクリアする
+		session.removeAttribute("cart");
+		//注文番号をクライアントへ送る
+		request.setAttribute("orderNumber",new Integer(orderNumber));
+		gotoPage(request,response,"/order.jsp");
+}else { //actionの値が不正
+		request.setAttribute("messege","正しく操作してください。");
+		gotoPage(request,response,"errInternal.jsp");
+}
 
 	}
 
