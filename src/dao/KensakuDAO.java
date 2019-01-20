@@ -63,6 +63,7 @@ public class KensakuDAO {
 
 			PreparedStatement st = null;
 			ResultSet rs = null;
+			//test
 			try {
 				String sql = "SELECT * FROM product WHERE title LIKE ?";
 				st = con.prepareStatement(sql);
