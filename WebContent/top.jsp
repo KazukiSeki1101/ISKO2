@@ -10,7 +10,7 @@
 
 	<h1>ISKO MANGA</h1>
 	<h3>検索機能</h3>
-	<form action="/src/servlet/BookServlet" method="post">
+	<form action="/ISKO2/BookServlet" method="post">
 		<p>タイトル</p>
 		<input type="text" name="title"><br>
 		<p>作者</p>
