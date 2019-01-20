@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bean.CartBean;
+import bean.KensakuBean;
+import dao.DAOException;
+import dao.KensakuDAO;
+
 @WebServlet("/CartServlet")
 public class CartServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
@@ -18,7 +23,7 @@ public class CartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		try {
 			// パラメータの解析
 			String action = request.getParameter("action");
@@ -36,8 +41,8 @@ public class CartServlet extends HttpServlet {
 					session.setAttribute("cart", cart);
 				}
 				// 商品コードの商品を取得する
-				ItemDAO dao = new ItemDAO();
-				ItemBean bean = dao.findByPrimayKey(code);
+				KensakuDAO dao = new KensakuDAO();
+				KensakuBean bean = dao.findByPrimayKey(code);
 				// カートに追加する
 				cart.addCart(bean, quantity);
 				gotoPage(request, response, "/cart.jsp");
@@ -67,18 +72,18 @@ public class CartServlet extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/errInternal.jsp");
-		}		
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
-	private void gotoPage(HttpServletResponse response,String page)throws ServletException,IOException{
-		RequestDispatcher rd = request.getRequestDispather(page);
+
+	private void gotoPage(HttpServletRequest request,HttpServletResponse response,String page)throws ServletException,IOException{
+		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request,response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
