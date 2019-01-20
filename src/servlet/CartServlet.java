@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,11 +41,9 @@ public class CartServlet extends HttpServlet {
 					cart = new CartBean();
 					session.setAttribute("cart", cart);
 				}
-				// 商品コードの商品を取得する
-				//KensakuDAO dao = new KensakuDAO();
-				//KensakuBean bean = dao.findByPrimayKey(code);
+
 				// カートに追加する
-				cart.addCart(bean, quantity);
+				cart.addCart(title, price);
 				gotoPage(request, response, "/cart.jsp");
 			// deleteはカートから削除処理
 			} else if (action.equals("delete")) {
