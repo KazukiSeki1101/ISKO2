@@ -27,10 +27,12 @@ public class ListServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			KensakuDAO dao = new KensakuDAO();
 
+
 			if (action.equals("detail")) {
 				String item_code = request.getParameter("item_code");
 				int item_code2 = Integer.parseInt(item_code);
 				List<KensakuBean> item_detail = dao.resultAll(item_code2);
+
 				request.setAttribute("items", item_detail);
 				gotoPage(request, response, "/detail.jsp");
 			} else {

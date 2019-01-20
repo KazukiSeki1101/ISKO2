@@ -12,8 +12,15 @@
 
 <jsp:include page="/LoginPage.jsp"/>
 <c:forEach items="${items}" var="item">
+
+
+<form action="/CartServlet?action=add" method="post">
+<input type ="hidden" name="item_code">>
+
 商品名：<a href="/ISKO2/ListServlet?action=detail&item_code=${item.code}">
 <b>${item.title}</b></a><br>
+
+
 
 価格：<b>${item.price}</b><br>
 
