@@ -28,18 +28,24 @@ public class ListServlet extends HttpServlet {
 			KensakuDAO dao = new KensakuDAO();
 
 
+
+
 			if (action.equals("detail")) {
 				String item_code = request.getParameter("item_code");
+
+
+
 				int item_code2 = Integer.parseInt(item_code);
 				List<KensakuBean> item_detail = dao.resultAll(item_code2);
 
 				request.setAttribute("items", item_detail);
+
 				gotoPage(request, response, "/detail.jsp");
 			} else {
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
 			}
-		} catch (Exception e) {
+			}catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/errInternal.jsp");
