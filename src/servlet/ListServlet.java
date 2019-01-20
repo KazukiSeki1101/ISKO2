@@ -27,16 +27,16 @@ public class ListServlet extends HttpServlet {
 			KensakuDAO dao = new KensakuDAO();
 			
 			if (action == null || action.length() == 0 || action.equals("")) {
-				gotoPage(request, response, ".jsp");
+				gotoPage(request, response, "/detail.jsp");
 			} else if (action.equals("list")) {
-				List<KensakuBean> list = dao.searchBook("","","","","");
+				List<KensakuBean> list = dao.searchBook("title","author","publisher","category","recommend");
 				// Listをリクエストスコープに入れてJSPへフォーワードする
 				request.setAttribute("items", list);
-				gotoPage(request, response, "/list.jsp");
+				gotoPage(request, response, "/detail.jsp");
 			} else if (action.equals("detail")) {
 				String item_code = request.getParameter("item_code");
 				List<DetailBean> item_detail = dao.itemdetail(item_code);
-				gotoPage(request, response, "/list.jsp");
+				gotoPage(request, response, "/detail.jsp");
 			} else {
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
