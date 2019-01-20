@@ -32,8 +32,8 @@ public class CartServlet extends HttpServlet {
 				gotoPage(request, response, "/cart.jsp");
 			// addはカートに追加処理
 			} else if (action.equals("add")) {
-				int code = Integer.parseInt(request.getParameter("item_code"));
-				int quantity = Integer.parseInt(request.getParameter("quantity"));
+				//int code = Integer.parseInt(request.getParameter("item_code"));
+				//int quantity = Integer.parseInt(request.getParameter("quantity"));
 				HttpSession session = request.getSession(true);
 				CartBean cart = (CartBean) session.getAttribute("cart");
 				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
@@ -41,8 +41,8 @@ public class CartServlet extends HttpServlet {
 					session.setAttribute("cart", cart);
 				}
 				// 商品コードの商品を取得する
-				KensakuDAO dao = new KensakuDAO();
-				KensakuBean bean = dao.findByPrimayKey(code);
+				//KensakuDAO dao = new KensakuDAO();
+				//KensakuBean bean = dao.findByPrimayKey(code);
 				// カートに追加する
 				cart.addCart(bean, quantity);
 				gotoPage(request, response, "/cart.jsp");
