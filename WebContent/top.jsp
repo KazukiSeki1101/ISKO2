@@ -10,7 +10,7 @@
 
 	<h1>ISKO MANGA</h1>
 	<h3>検索機能</h3>
-	<form action="/src/servlet/BookServlet" method="post">
+	<form action="/ISKO2/BookServlet" method="post">
 		<p>タイトル</p>
 		<input type="text" name="title"><br>
 		<p>作者</p>
@@ -29,6 +29,7 @@
 			<option value="4">2019年に流行るスポーツマンガ！</option>
 			<option value="5">ファッション好きに進めたいオサレなマンガ！</option>
 		</select> <br> <input type="submit" value="検索">
+		<input type="hidden" name="action" value="search">
 	</form>
 </body>
 </html>
