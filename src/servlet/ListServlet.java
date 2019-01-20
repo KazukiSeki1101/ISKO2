@@ -16,21 +16,21 @@ import bean.KensakuBean;
 @WebServlet("/ListServlet")
 public class ListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ListServlet() {
-        super();
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ListServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			String action = request.getParameter("action");
 			KensakuDAO dao = new KensakuDAO();
-			
-			if (action.equals("top") || action == null || action.length() == 0 || action.equals("")) {
-				gotoPage(request, response, "top.jsp");
-			} else if (action.equals("detail")) {
+
+			if (action.equals("detail")) {
 				String item_code = request.getParameter("item_code");
-				List<KensakuBean> item_detail = dao.resultAll(Integer.parseInt(item_code));
+				int item_code2 = Integer.parseInt(item_code);
+				List<KensakuBean> item_detail = dao.resultAll(item_code2);
 				request.setAttribute("items", item_detail);
 				gotoPage(request, response, "/detail.jsp");
 			} else {
@@ -44,13 +44,14 @@ public class ListServlet extends HttpServlet {
 		}
 	}
 
-	private void gotoPage(HttpServletRequest request,HttpServletResponse response, String page) throws ServletException, IOException {
+	private void gotoPage(HttpServletRequest request, HttpServletResponse response, String page)
+			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

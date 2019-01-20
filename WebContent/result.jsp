@@ -12,12 +12,12 @@
 
 <jsp:include page="/LoginPage.jsp"/>
 <c:forEach items="${items}" var="item">
-商品名：<a href="/ListServlet?action=detail&item_code=${item.code}"><b>${item.title}</b></a><br>
+商品名：<a href="/ISKO2/ListServlet?action=detail&item_code=${item.code}">
+<b>${item.title}</b></a><br>
 
 価格：<b>${item.price}</b><br>
 
 <input type="submit" value="カートに入れる">
-</form>
 </c:forEach>
 </body>
 </html>
