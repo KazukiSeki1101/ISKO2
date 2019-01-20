@@ -66,10 +66,19 @@ public class KensakuDAO {
 			ResultSet rs = null;
 			//test
 			try {
-				String sql = "SELECT * FROM product WHERE title LIKE ?";
+				String sql = "SELECT * FROM product WHERE title LIKE ? AND author LIKE ? AND publisher LIKE ? AND category LIKE ? AND recommended LIKE ?";
+				String queryConditionTitle = "%" + title + "%";
+				String queryConditionAuthor = "%" + author + "%";
+				String queryConditionPublisher = "%" + publisher + "%";
+				String queryConditionCategory = "%" + category + "%";
+				String queryConditionRecommend = "%" + recommend + "%";
 				st = con.prepareStatement(sql);
+				st.setString(1, queryConditionTitle);
+				st.setString(2, queryConditionAuthor);
+				st.setString(3, queryConditionPublisher);
+				st.setString(4, queryConditionCategory);
+				st.setString(5, queryConditionRecommend);
 				rs = st.executeQuery();
-				st.setString(1, "%"+title+"%");
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
 					int code2 = rs.getInt("code");

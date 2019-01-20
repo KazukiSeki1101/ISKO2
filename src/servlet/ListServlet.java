@@ -33,6 +33,8 @@ public class ListServlet extends HttpServlet {
 				List<KensakuBean> item_detail = dao.resultAll(item_code2);
 				request.setAttribute("items", item_detail);
 				gotoPage(request, response, "/detail.jsp");
+			} else if(action.equals("top")) {
+				gotoPage(request, response, "/top.jsp");
 			} else {
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
