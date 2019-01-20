@@ -12,8 +12,6 @@
 
 <jsp:include page="/LoginPage.jsp"/>
 <c:forEach items="${items}" var="item">
-<<<<<<< HEAD
-=======
 
 
 
