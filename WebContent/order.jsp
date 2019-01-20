@@ -20,8 +20,8 @@
 <tr>
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
-	<td align="right">${item.value.quantity}</td>
-	<td align="right">${item.value.price * item.value.quantity}円</td>
+	<td align="right">1</td>
+	<td align="right">${item.value.price * 1}円</td>
 </tr>
 </c:forEach>
 <tr><td align="right" colspan="6">総計：${cart.total}円</td></tr>
