@@ -10,12 +10,14 @@
 </head>
 <body>
 <jsp:include page="/LoginPage.jsp">
-
-
 <c:forEach items="${items}" var="item">
-商品名：<a href="/ListServlet?action=detail&item_code=${item.title2}"><b>${item.name}</b></a><br>
+<form action="/CartServlet?action=add" method="post">
+<input type ="hidden" name="item_code">
+商品名：<a href="/ListServlet?action=detail&item_code=${item.title}"><br>
+価格：<b>${item.price}</b><br>
 
-価格：<b>${item.price2}</b><br>
+<input type="submit" value="カートに入れる">
+</form>
 </c:forEach>
 </body>
 </html>

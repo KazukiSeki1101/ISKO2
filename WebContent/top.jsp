@@ -7,11 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="/LoginPage.jsp" />
-	<br>
-	<br>
-	<br>
-	<br>
+
+	
+	<jsp:include page="/Youkoso.jsp" />
+
 	<h1>ISKO MANGA</h1>
 	<h3>検索機能</h3>
 	<form action="/ISKO2/BookServlet" method="post">
