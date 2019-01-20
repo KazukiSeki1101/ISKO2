@@ -15,17 +15,6 @@ public class CartBean {
 		return items;
 	}
 
-	public void addCart(KensakuBean bean, int nums) {
-		KensakuBean item = (KensakuBean) items.get(new Integer(bean.getCode()));
-		if (item == null) {
-			bean.setQuantity(nums);
-			items.put(new Integer(bean.getCode()), bean);
-		} else {
-			item.setQuantity(nums + item.getQuantity());
-		}
-		recalcTotal();
-	}
-
 	public void deleteCart(int itemCode) {
 		items.remove(new Integer(itemCode));
 		recalcTotal();
@@ -39,7 +28,7 @@ public class CartBean {
 		total = 0;
 		Collection<KensakuBean> list = items.values();
 		for (KensakuBean item : list) {
-			total += item.getPrice() * item.getQuantity();
+			total += item.getPrice() * 1;
 		}
 	}
 }

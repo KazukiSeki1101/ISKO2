@@ -31,9 +31,10 @@ public class KensakuDAO {
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
+					int code2 = rs.getInt("code");
 					String title2 = rs.getString("title");
 					int price2 = rs.getInt("price");
-					KensakuBean bean = new KensakuBean(title2, price2);
+					KensakuBean bean = new KensakuBean(code2, title2, price2);
 					list.add(bean);
 				}
 				// git変更テスト
@@ -63,15 +64,18 @@ public class KensakuDAO {
 
 			PreparedStatement st = null;
 			ResultSet rs = null;
+			//test
 			try {
-				String sql = "SELECT * FROM product WHERE title LIKE'title', author LIKE'author', publisher LIKE 'publisher', category, recommend FROM product";
+				String sql = "SELECT * FROM product WHERE title LIKE ?";
 				st = con.prepareStatement(sql);
 				rs = st.executeQuery();
+				st.setString(1, "%"+title+"%");
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
+					int code2 = rs.getInt("code");
 					String title2 = rs.getString("title");
 					int price2 = rs.getInt("price");
-					KensakuBean bean = new KensakuBean(title2,price2);
+					KensakuBean bean = new KensakuBean(code2, title2,price2);
 					list.add(bean);
 				}
 				return list;
@@ -93,28 +97,27 @@ public class KensakuDAO {
 				}
 			}
 		}
-	//プライマリーキーから商品情報をとる
-	public List<KensakuBean> resultAll(int code) throws DAOException {
+	//商品一覧から商品詳細へ渡す
+	public List<KensakuBean> resultAll(int item_code2) throws DAOException {
 		if (con == null) 
 			getConnection();
 
 			PreparedStatement st = null;
 			ResultSet rs = null;
 			try {
-				String sql = "SELECT * FROM product WHERE code=?";
+				String sql = "SELECT*FROM product WHERE code=1";
 				st = con.prepareStatement(sql);
-				st.setInt(1, code);
+				//st.setInt(1, item_code2);
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
-					int code2=rs.getInt(code);
-					String title2 = rs.getString("title");
-					int price2 = rs.getInt("price");
-					String author2=rs.getString("author");
-					String publisher2=rs.getString("publisher");
-					String category2=rs.getString("category");
-					String recommend2=rs.getString("recommend");
-					KensakuBean bean = new KensakuBean(code2,title2,price2,author2,publisher2,category2,recommend2);
+					String title = rs.getString("title");
+					int price = rs.getInt("price");
+					String author=rs.getString("author");
+					String publisher=rs.getString("publisher");
+					String category=rs.getString("category");
+					String recommend=rs.getString("recommended");
+					KensakuBean bean = new KensakuBean(title,price,author,publisher,category,recommend);
 					list.add(bean);
 				}
 				return list;

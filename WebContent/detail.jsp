@@ -10,7 +10,6 @@
 <body>
 
 <jsp:include page="/LoginPage.jsp"/>
-
 <p>商品画像<p>
 
 <p>商品名：${items.title}</p>
