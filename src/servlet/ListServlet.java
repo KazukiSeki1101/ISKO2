@@ -27,30 +27,13 @@ public class ListServlet extends HttpServlet {
 			String action = request.getParameter("action");
 			KensakuDAO dao = new KensakuDAO();
 
-			
 
-			if (action == null || action.length() == 0 || action.equals("")) {
-				gotoPage(request, response, "/detail.jsp");
-			} else if (action.equals("list")) {
-				List<KensakuBean> list = dao.searchBook("title","author","publisher","category","recommend");
-				// Listをリクエストスコープに入れてJSPへフォーワードする
-				request.setAttribute("items", list);
-				gotoPage(request, response, "/detail.jsp");
-
-			if (action.equals("top") || action == null || action.length() == 0 || action.equals("")) {
-				gotoPage(request, response, "top.jsp");
-
-			} else if (action.equals("detail")) {
 
 
 			if (action.equals("detail")) {
-
 				String item_code = request.getParameter("item_code");
 
 
-				List<DetailBean> item_detail = dao.itemdetail(item_code);
-
-				List<KensakuBean> item_detail = dao.resultAll(Integer.parseInt(item_code));
 
 				int item_code2 = Integer.parseInt(item_code);
 				List<KensakuBean> item_detail = dao.resultAll(item_code2);
