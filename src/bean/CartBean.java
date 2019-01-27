@@ -3,10 +3,26 @@ package bean;
 public class CartBean {
 	private String title;
 	private int price;
+	private int quantity;
+	private int code;
 	
-	public CartBean(String title, int price) {
+	public CartBean(String title, int price, int quantity, int code) {
 		this.title = title;
 		this.price = price;
+		this.quantity = quantity;
+		this.code = code;
+	}
+	public int getCode() {
+		return code;
+	}
+	public void setCode(int code) {
+		this.code = code;
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	public String getTitle() {
 		return title;
