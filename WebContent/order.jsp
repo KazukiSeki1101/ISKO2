@@ -27,10 +27,6 @@
 </table>
 <br>
 <form action="/ISKO2/OrderServlet" method="post">
-	<input type="hidden" name="action" value="end">
-	<input type="submit" value="注文する">
-</form>
-<form action="/ISKO2/OrderServlet" method="post">
 <input type="hidden" name="action" value="end">
 <input type="submit" value="確定">
 </form>
