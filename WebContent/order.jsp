@@ -14,7 +14,7 @@
 
 <c:if test="${not empty cart}">
 <table border="1">
-<tr><td>商品名</td><td>単価</td><td>個数</td><td>小計</td><td colspan="2"></tr>
+<tr><td>商品名</td><td>単価</td><td>個数</td><td>小計</td></tr>
 <c:forEach items="${cart}" var="item" varStatus="stat">
 <tr>
 	<td align="center">${item.title}</td>
@@ -30,7 +30,10 @@
 	<input type="hidden" name="action" value="end">
 	<input type="submit" value="注文する">
 </form>
+<form action="/ISKO2/OrderServlet" method="post">
+<input type="hidden" name="action" value="end">
 <input type="submit" value="確定">
+</form>
 </c:if>
 
 </body>
