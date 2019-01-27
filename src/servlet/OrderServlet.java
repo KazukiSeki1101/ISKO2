@@ -47,7 +47,7 @@ public class OrderServlet extends HttpServlet {
 
 		if(action == null || action.length() == 0) {
 			request.setAttribute("message","正しく操作してください。");
-			gotoPage(request,response,"errInternal.jsp");
+			gotoPage(request,response,"/errInternal.jsp");
 
 		int orderNumber = 1;
 		orderNumber++;
@@ -58,7 +58,7 @@ public class OrderServlet extends HttpServlet {
 		gotoPage(request,response,"/order.jsp");
 }else { //actionの値が不正
 		request.setAttribute("messege","正しく操作してください。");
-		gotoPage(request,response,"errInternal.jsp");
+		gotoPage(request,response,"/errInternal.jsp");
 }
 
 	}

@@ -12,26 +12,26 @@
 <p align="right">isko さん、こんにちは</p><br>
 <h3>ご注文商品</h3>
 
+
 <c:if test="${not empty cart}">
 <table border="1">
-<tr><td>商品名</td><td>単価(税込)</td><td>個数</td><td>小計</td></tr>
-
-<c:forEach items="${cart}" var="item">
+<tr><td>商品名</td><td>単価</td><td>個数</td><td>小計</td><td colspan="2"></tr>
+<c:forEach items="${cart}" var="item" varStatus="stat">
 <tr>
-	<td align="center">${item.value.name}</td>
-	<td align="right">${item.value.price}円</td>
+	<td align="center">${item.title}</td>
+	<td align="right">${item.price}円</td>
 	<td align="right">
 	<select name="quantity">
-	<option value="1">1
-	<option value="2">2
-	<option value="3">3
-	<option value="4">4
-	<option value="5">5
+	<option <c:if test="${item.quantity eq 1}">selected</c:if> value="1">1
+	<option <c:if test="${item.quantity eq 2}">selected</c:if> value="2">2
+	<option <c:if test="${item.quantity eq 3}">selected</c:if> value="3">3
+	<option <c:if test="${item.quantity eq 4}">selected</c:if> value="4">4
+	<option <c:if test="${item.quantity eq 5}">selected</c:if> value="5">5
 	</select></td>
-	<td align="right">${item.value.price * item.value.quantity}円</td>
+	<td align="right">${item.price * item.quantity}円</td>
 </tr>
 </c:forEach>
-<tr><td align="right" colspan="6">総計：${cart.total}円</td></tr>
+<tr><td align="right" colspan="6">総計：${totalprice}円</td></tr>
 </table>
 <br>
 
