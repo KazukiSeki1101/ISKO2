@@ -19,10 +19,8 @@
 
 <c:if test="${not empty cart}">
 <table border="1">
-<tr><td>商品名</td><td>単価</td>
-    <td>個数</td><td>小計</td><td colspan="2">アクション</td></tr>
-
-<c:forEach items="${cart}" var="item">
+<tr><td>商品名</td><td>単価</td><td>個数</td><td>小計</td><td colspan="2">アクション</td></tr>
+<c:forEach items="${cart}" var="item" varStatus="stat">
 <tr>
 	<td align="center">${item.title}</td>
 	<td align="right">${item.price}円</td>
@@ -36,8 +34,9 @@
 	</select></td>
 	<td align="right">${item.price * item.quantity}円</td>
 <td align="center">
-<form action="/ISKO2/CartServlet?action=delete" method="post">
-	<input type="hidden" name="item_code" value="${item.code}">
+<form action="/ISKO2/CartServlet" method="post">
+	<input type="hidden" name="action" value="delete">
+	<input type="hidden" name="item_index" value="${stat.index}">
 	<input type="submit" value="削除">
 </form>
 <form action="/ISKO2/CartServlet?action=update" method="post">
@@ -47,9 +46,7 @@
 </td>
 </tr>
 </c:forEach>
-<!-- 
-<tr><td align="right" colspan="6">総計：円</td></tr>
--->
+<tr><td align="right" colspan="6">総計：${totalprice}円</td></tr>
 </table>
 
 <form action="/ISKO2/BookServlet?action=search" method="post">
