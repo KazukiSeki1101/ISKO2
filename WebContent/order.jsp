@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +28,7 @@
 	<option value="4">4
 	<option value="5">5
 	</select></td>
-	<td align="right">${item.value.price * quantity}円</td>
+	<td align="right">${item.value.price * item.value.quantity}円</td>
 </tr>
 </c:forEach>
 <tr><td align="right" colspan="6">総計：${cart.total}円</td></tr>
@@ -41,9 +41,8 @@
 <input type="radio" name="pay" value="card">クレジットカード
 </form>
 
-<a href="/ISKO2/buy.jsp" method="post">
 <input type="submit" value="確定">
-</a>
+
 
 </c:if>
 
