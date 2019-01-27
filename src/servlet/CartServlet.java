@@ -50,23 +50,12 @@ public class CartServlet extends HttpServlet {
 			session.setAttribute("cart", cart);
 			request.setAttribute("totalprice", totalprice);
 			gotoPage(request, response, "/cart.jsp");
-				
-		// deleteはカートから削除処理
+			
 		} else if (action.equals("delete")) {
-			HttpSession session = request.getSession(false);
-			if(session == null) { // セッションオブジェクトなし
-				request.setAttribute("message","セッションが切れています。もう一度トップページより操作してください。");
-				gotoPage(request, response, "/errInternal.jsp");
-				return;
-			}
-			CartBean cart = (CartBean)session.getAttribute("cart");
-			if(cart == null) { // カートがない
-				request.setAttribute("message", "正しく操作してください。");
-				gotoPage(request, response, "/errInternal.jsp");
-				return;
-			}
-			//int code = Integer.parseInt(request.getParameter("item_code"));
-			//cart.deleteCart(code);
+			String item_index = request.getParameter("item_index");
+			// セッションから現在のリストを取り出す
+			// リストからインデックスのデータをremove
+			// removeしたリストをまた同じセッションに戻してsetAttribute
 			gotoPage(request, response, "/cart.jsp");
 		} else { //actionの値が不正
 			request.setAttribute("message", "正しく操作してください。");

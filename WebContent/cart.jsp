@@ -34,8 +34,9 @@
 	</select></td>
 	<td align="right">${item.price * item.quantity}円</td>
 <td align="center">
-<form action="/ISKO2/CartServlet?action=delete" method="post">
-	<input type="hidden" name="item_code" value="${stat.index}">
+<form action="/ISKO2/CartServlet" method="post">
+	<input type="hidden" name="action" value="delete">
+	<input type="hidden" name="item_index" value="${stat.index}">
 	<input type="submit" value="削除">
 </form>
 <form action="/ISKO2/CartServlet?action=update" method="post">
