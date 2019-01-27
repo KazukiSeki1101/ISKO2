@@ -19,48 +19,48 @@ public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
+
+		request.setCharacterEncoding("UTF-8");	
 		// パラメータの解析
-		String action = request.getParameter("action");
-		String title = request.getParameter("title");
-		String price = request.getParameter("price");
-		String quantity = request.getParameter("quantity");
-		String code = request.getParameter("code");
-			
-		// showまたはパラメータなしの場合はカートページを表示
-		if (action == null || action.length() == 0 || action.equals("show")) {
-			gotoPage(request, response, "/cart.jsp");
-			// addはカートに追加処理
-		} else if (action.equals("add")) {
-			HttpSession session = request.getSession(true);
-			CartBean bean = new CartBean(title, Integer.parseInt(price), Integer.parseInt(quantity), Integer.parseInt(code));
+			String action = request.getParameter("action");
+			String title = request.getParameter("title");
+			String price = request.getParameter("price");
+			String quantity = request.getParameter("quantity");
+			String code = request.getParameter("code");
+			String index = request.getParameter("index");
+
+			// showまたはパラメータなしの場合はカートページを表示
+			if (action == null || action.length() == 0 || action.equals("show")) {
+				gotoPage(request, response, "/cart.jsp");
+				// addはカートに追加処理
+			} else if (action.equals("add")) {
+				HttpSession session = request.getSession(true);
+				CartBean bean = new CartBean(title, Integer.parseInt(price), Integer.parseInt(quantity), Integer.parseInt(code));
 				
-			@SuppressWarnings("unchecked")
-			List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+				@SuppressWarnings("unchecked")
+				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
+					cart = new ArrayList<CartBean>();
+				}
+				cart.add(bean);
+				session.setAttribute("cart", cart);
+				gotoPage(request, response, "/cart.jsp");
+			} else if(action.equals("delete")) {
+				HttpSession session = request.getSession(true);
+				CartBean bean = new CartBean(title, Integer.parseInt(price), Integer.parseInt(quantity), Integer.parseInt(code));
+				@SuppressWarnings("unchecked")
+				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
 				
-			if (cart == null) { // 初めてのクライアントの場合はカートを作成する
-				cart = new ArrayList<CartBean>();
+				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
+					cart = new ArrayList<CartBean>();					
+				}
+				cart.remove(index);
+				
+			} else { //actionの値が不正
+				request.setAttribute("message", "正しく操作してください。");
+				gotoPage(request, response, "/errInternal.jsp");
+				return;
 			}
-			cart.add(bean);
-			int totalprice = 0;
-			for(CartBean totalbean : cart){
-				totalprice += totalbean.getPrice();
-			}
-			session.setAttribute("cart", cart);
-			request.setAttribute("totalprice", totalprice);
-			gotoPage(request, response, "/cart.jsp");
-			
-		} else if (action.equals("delete")) {
-			String item_index = request.getParameter("item_index");
-			// セッションから現在のリストを取り出す
-			// リストからインデックスのデータをremove
-			// removeしたリストをまた同じセッションに戻してsetAttribute
-			gotoPage(request, response, "/cart.jsp");
-		} else { //actionの値が不正
-			request.setAttribute("message", "正しく操作してください。");
-			gotoPage(request, response, "/errInternal.jsp");
-		}
 	}
 
 	/**
