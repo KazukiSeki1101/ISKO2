@@ -22,7 +22,7 @@
 <tr><td>商品名</td><td>単価</td>
     <td>個数</td><td>小計</td><td colspan="2">アクション</td></tr>
 
-<c:forEach items="${cart}" var="index" varStatus="status">
+<c:forEach items="${cart}" var="item" varStatus="status">
 <tr>
 	<td align="center">${item.title}</td>
 	<td align="right">${item.price}円</td>

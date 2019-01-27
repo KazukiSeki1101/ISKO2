@@ -20,14 +20,6 @@
 	<td align="center">${item.title}</td>
 	<td align="right">${item.price}円</td>
 	<td align="right">${item.quantity}</td>
-	<td align="right">
-	<select name="quantity">
-	<option <c:if test="${item.quantity eq 1}">selected</c:if> value="1">1
-	<option <c:if test="${item.quantity eq 2}">selected</c:if> value="2">2
-	<option <c:if test="${item.quantity eq 3}">selected</c:if> value="3">3
-	<option <c:if test="${item.quantity eq 4}">selected</c:if> value="4">4
-	<option <c:if test="${item.quantity eq 5}">selected</c:if> value="5">5
-	</select></td>
 	<td align="right">${item.price * item.quantity}円</td>
 </tr>
 </c:forEach>
