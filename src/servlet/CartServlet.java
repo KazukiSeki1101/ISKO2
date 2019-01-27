@@ -18,13 +18,16 @@ import bean.CartBean;
 public class CartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings({ "unlikely-arg-type", "unused" })
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			// パラメータの解析
+		request.setCharacterEncoding("UTF-8");	
+		// パラメータの解析
 			String action = request.getParameter("action");
 			String title = request.getParameter("title");
 			String price = request.getParameter("price");
 			String quantity = request.getParameter("quantity");
 			String code = request.getParameter("code");
+			String index = request.getParameter("index");
 			
 			// showまたはパラメータなしの場合はカートページを表示
 			if (action == null || action.length() == 0 || action.equals("show")) {
@@ -41,8 +44,20 @@ public class CartServlet extends HttpServlet {
 					cart = new ArrayList<CartBean>();
 				}
 				cart.add(bean);
+				
 				session.setAttribute("cart", cart);
 				gotoPage(request, response, "/cart.jsp");
+			} else if(action.equals("delete")) {
+				HttpSession session = request.getSession(true);
+				CartBean bean = new CartBean(title, Integer.parseInt(price), Integer.parseInt(quantity), Integer.parseInt(code));
+				@SuppressWarnings("unchecked")
+				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+				
+				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
+					cart = new ArrayList<CartBean>();					
+				}
+				cart.remove(index);
+				
 			} else { //actionの値が不正
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");

@@ -22,7 +22,7 @@
 <tr><td>商品名</td><td>単価</td>
     <td>個数</td><td>小計</td><td colspan="2">アクション</td></tr>
 
-<c:forEach items="${cart}" var="item">
+<c:forEach items="${cart}" var="index" varStatus="status">
 <tr>
 	<td align="center">${item.title}</td>
 	<td align="right">${item.price}円</td>
@@ -37,7 +37,7 @@
 	<td align="right">${item.price * item.quantity}円</td>
 <td align="center">
 <form action="/ISKO2/CartServlet?action=delete" method="post">
-	<input type="hidden" name="item_code" value="${item.code}">
+	<input type="hidden" name="index" value="${status.index}">
 	<input type="submit" value="削除">
 </form>
 <form action="/ISKO2/CartServlet?action=update" method="post">
