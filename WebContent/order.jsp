@@ -12,11 +12,11 @@
 <p align="right">isko さん、こんにちは</p><br>
 <h3>ご注文商品</h3>
 
-<c:if test="${not empty cart.items}">
+<c:if test="${not empty cart}">
 <table border="1">
 <tr><td>商品名</td><td>単価(税込)</td><td>個数</td><td>小計</td></tr>
 
-<c:forEach items="${cart.items}" var="item">
+<c:forEach items="${cart}" var="item">
 <tr>
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
