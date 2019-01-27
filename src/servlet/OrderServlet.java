@@ -59,7 +59,6 @@ public class OrderServlet extends HttpServlet {
 			request.setAttribute("messege","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
 		}
-
 	}
 
 	private void gotoPage(HttpServletRequest request,HttpServletResponse response,String page)throws ServletException,IOException{
