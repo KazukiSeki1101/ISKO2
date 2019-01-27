@@ -18,10 +18,8 @@
 <form action="/CartServlet?action=add" method="post">
 <input type ="hidden" name="item_code">>
 
-商品名：<a href="/ISKO2/ListServlet?action=detail&item_code=${item.code}">
-<b>${item.title}</b></a><br>
-
-
+商品名：<a href="/ISKO2/ListServlet?action=item_code=${item.code}"></a>
+<b>${item.title}</b><br>
 価格：<b>${item.price}</b><br>
 
 <input type="submit" value="カートに入れる">
