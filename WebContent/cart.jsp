@@ -54,7 +54,8 @@
 	<input type="submit" value="買い物を続ける">
 </form>
 
-<form action="/ISKO2/OrderServlet?action=order" method="post">
+<form action="/ISKO2/OrderServlet" method="post">
+	<input type="hidden" name="action" value="order">
 	<input type="submit" value="注文する">
 </form>
 </c:if>
