@@ -15,10 +15,12 @@
 
 
 
-<form action="/CartServlet?action=add" method="post">
-<input type ="hidden" name="item_code">>
+<form action="/CartServlet" method="post">
+<input type="hidden" name="action" value="add">
+<input type="hidden" name="title" value="${item.title}">
+<input type="hidden" name="price" value="${item.price}">
 
-商品名：<a href="/ISKO2/ListServlet?action=detail&item_code=${item.code}">
+商品名：<a href="/ListServlet?action=detail&item_code=${item.code}">
 <b>${item.title}</b></a><br>
 
 

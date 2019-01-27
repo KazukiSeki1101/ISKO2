@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.RequestDispatcher;
@@ -28,23 +30,28 @@ public class CartServlet extends HttpServlet {
 		try {
 			// パラメータの解析
 			String action = request.getParameter("action");
+			String title = request.getParameter("title");
+			String price = request.getParameter("price");
+			
 			// showまたはパラメータなしの場合はカートページを表示
 			if (action == null || action.length() == 0 || action.equals("show")) {
 				gotoPage(request, response, "/cart.jsp");
 			// addはカートに追加処理
 			} else if (action.equals("add")) {
-				//int code = Integer.parseInt(request.getParameter("item_code"));
-				//int quantity = Integer.parseInt(request.getParameter("quantity"));
+				
 				HttpSession session = request.getSession(true);
-				CartBean cart = (CartBean) session.getAttribute("cart");
+				CartBean bean = new CartBean(title, Integer.parseInt(price));
+				
+				@SuppressWarnings("unchecked")
+				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+				
 				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
-					cart = new CartBean();
-					session.setAttribute("cart", cart);
+					cart = new ArrayList<CartBean>();
 				}
-
-				// カートに追加する
-				cart.addCart(title, price);
+				cart.add(bean);
+				session.setAttribute("cart", cart);
 				gotoPage(request, response, "/cart.jsp");
+				
 			// deleteはカートから削除処理
 			} else if (action.equals("delete")) {
 				HttpSession session = request.getSession(false);
