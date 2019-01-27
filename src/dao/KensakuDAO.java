@@ -114,9 +114,9 @@ public class KensakuDAO {
 			PreparedStatement st = null;
 			ResultSet rs = null;
 			try {
-				String sql = "SELECT*FROM product WHERE code=1";
+				String sql = "SELECT*FROM product WHERE code=?";
 				st = con.prepareStatement(sql);
-				//st.setInt(1, item_code2);
+				st.setInt(1, item_code2);
 				rs = st.executeQuery();
 				List<KensakuBean> list = new ArrayList<KensakuBean>();
 				while (rs.next()) {
