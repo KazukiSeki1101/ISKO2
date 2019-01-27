@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    	
 
 <!DOCTYPE html>
 <html>
@@ -12,39 +14,25 @@
 <p align="right">isko さん、こんにちは</p><br>
 <h3>ご注文商品</h3>
 
-<c:if test="${not empty cart.items}">
+<c:if test="${not empty cart}">
 <table border="1">
 <tr><td>商品名</td><td>単価(税込)</td><td>個数</td><td>小計</td></tr>
 
-<c:forEach items="${cart.items}" var="item">
+<c:forEach items="${cart}" var="item">
 <tr>
-	<td align="center">${item.value.name}</td>
-	<td align="right">${item.value.price}円</td>
-	<td align="right">
-	<select name="quantity">
-	<option value="1">1
-	<option value="2">2
-	<option value="3">3
-	<option value="4">4
-	<option value="5">5
-	</select></td>
-	<td align="right">${item.value.price * quantity}円</td>
+	<td align="center">${item.title}</td>
+	<td align="right">${item.price}円</td>
+	<td align="right">${item.quantity}</td>
+	<td align="right">${item.price * item.quantity}円</td>
 </tr>
 </c:forEach>
-<tr><td align="right" colspan="6">総計：${cart.total}円</td></tr>
+<tr><td align="right" colspan="6">総計：円</td></tr>
 </table>
 <br>
-
 <form action="/ISKO2/OrderServlet" method="post">
-<p>お支払い方法を選択してください。</p>
-<input type="radio" name="pay" value="cash">現金
-<input type="radio" name="pay" value="card">クレジットカード
+	<input type="hidden" name="action" value="end">
+	<input type="submit" value="注文する">
 </form>
-
-<a href="/ISKO2/buy.jsp" method="post">
-<input type="submit" value="確定">
-</a>
-
 </c:if>
 
 </body>

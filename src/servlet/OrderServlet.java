@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +21,7 @@ import bean.CartBean;
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#doPost1(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost1(HttpServletRequest request,
+	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
@@ -35,7 +33,10 @@ public class OrderServlet extends HttpServlet {
 			gotoPage(request,response,"errInternal.jsp");
 			return;
 		}
-		CartBean cart = (CartBean)session.getAttribute("cart");
+		
+		@SuppressWarnings("unchecked")
+		List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+		
 		if(cart == null) { //カートがない
 			request.setAttribute("message","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
@@ -48,18 +49,13 @@ public class OrderServlet extends HttpServlet {
 		if(action == null || action.length() == 0) {
 			request.setAttribute("message","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
-
-		int orderNumber = 1;
-		orderNumber++;
-		//注文後はセッション情報をクリアする
-		session.removeAttribute("cart");
-		//注文番号をクライアントへ送る
-		request.setAttribute("orderNumber",new Integer(orderNumber));
-		gotoPage(request,response,"/order.jsp");
-}else { //actionの値が不正
-		request.setAttribute("messege","正しく操作してください。");
-		gotoPage(request,response,"errInternal.jsp");
-}
+		} else if(action.equals("order")) {
+			session.setAttribute("cart", cart);
+			gotoPage(request, response, "/order.jsp");
+		} else { //actionの値が不正
+			request.setAttribute("messege","正しく操作してください。");
+			gotoPage(request,response,"errInternal.jsp");
+		}
 
 	}
 
