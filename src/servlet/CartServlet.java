@@ -27,7 +27,6 @@ public class CartServlet extends HttpServlet {
 			String price = request.getParameter("price");
 			String quantity = request.getParameter("quantity");
 			String code = request.getParameter("code");
-			String index = request.getParameter("index");
 
 			// showまたはパラメータなしの場合はカートページを表示
 			if (action == null || action.length() == 0 || action.equals("show")) {
@@ -43,19 +42,43 @@ public class CartServlet extends HttpServlet {
 					cart = new ArrayList<CartBean>();
 				}
 				cart.add(bean);
+				int totalprice = 0;
+				for(CartBean cartbean : cart){
+					totalprice += cartbean.getPrice();
+				}
 				session.setAttribute("cart", cart);
+				session.setAttribute("totalprice", totalprice);
 				gotoPage(request, response, "/cart.jsp");
 			} else if(action.equals("delete")) {
-				HttpSession session = request.getSession(true);
-				CartBean bean = new CartBean(title, Integer.parseInt(price), Integer.parseInt(quantity), Integer.parseInt(code));
+				String index_number = request.getParameter("index_number");
+				HttpSession session = request.getSession(false);
 				@SuppressWarnings("unchecked")
 				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
-				
-				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
-					cart = new ArrayList<CartBean>();					
+				cart.remove(Integer.parseInt(index_number));
+				int totalprice = 0;
+				for(CartBean cartbean : cart){
+					totalprice += cartbean.getPrice();
 				}
-				cart.remove(index);
+				session.setAttribute("cart", cart);
+				session.setAttribute("totalprice", totalprice);
+				gotoPage(request, response, "/cart.jsp");
+			} else if(action.equals("update")) {
+				String index_number = request.getParameter("index_number");
+				HttpSession session = request.getSession(false);
+
+				@SuppressWarnings("unchecked")
+				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+				CartBean updatebean = cart.get(Integer.parseInt(index_number));
+				updatebean.setQuantity(Integer.parseInt(quantity));
+				cart.set(Integer.parseInt(index_number), updatebean);
+				int totalprice = 0;
 				
+				for(CartBean cartbean : cart){
+					totalprice += cartbean.getPrice() * cartbean.getQuantity();
+				}
+				session.setAttribute("cart", cart);
+				session.setAttribute("totalprice", totalprice);
+				gotoPage(request, response, "/cart.jsp");
 			} else { //actionの値が不正
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
