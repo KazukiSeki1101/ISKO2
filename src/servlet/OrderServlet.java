@@ -52,6 +52,9 @@ public class OrderServlet extends HttpServlet {
 		} else if(action.equals("order")) {
 			session.setAttribute("cart", cart);
 			gotoPage(request, response, "/order.jsp");
+		} else if(action.equals("end")) {
+			session.setAttribute("cart", cart);
+			gotoPage(request, response, "/order.jsp");
 		} else { //actionの値が不正
 			request.setAttribute("messege","正しく操作してください。");
 			gotoPage(request,response,"errInternal.jsp");
