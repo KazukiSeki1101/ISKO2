@@ -18,6 +18,7 @@ import bean.KensakuBean;
 import dao.DAOException;
 import dao.KensakuDAO;
 
+@SuppressWarnings("serial")
 @WebServlet("/CartServlet")
 public class CartServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
@@ -27,56 +28,51 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		try {
-			// パラメータの解析
-			String action = request.getParameter("action");
-			String title = request.getParameter("title");
-			String price = request.getParameter("price");
+		// パラメータの解析
+		String action = request.getParameter("action");
+		String title = request.getParameter("title");
+		String price = request.getParameter("price");
+		String amount = request.getParameter("amount");
+					
+		// showまたはパラメータなしの場合はカートページを表示
+		if (action == null || action.length() == 0 || action.equals("show")) {
+			gotoPage(request, response, "/cart.jsp");
+		// addはカートに追加処理
+		} else if (action.equals("add")) {
 			
-			// showまたはパラメータなしの場合はカートページを表示
-			if (action == null || action.length() == 0 || action.equals("show")) {
-				gotoPage(request, response, "/cart.jsp");
-			// addはカートに追加処理
-			} else if (action.equals("add")) {
-				
-				HttpSession session = request.getSession(true);
-				CartBean bean = new CartBean(title, Integer.parseInt(price));
-				
-				@SuppressWarnings("unchecked")
-				List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
-				
-				if (cart == null) { // 初めてのクライアントの場合はカートを作成する
-					cart = new ArrayList<CartBean>();
-				}
-				cart.add(bean);
-				session.setAttribute("cart", cart);
-				gotoPage(request, response, "/cart.jsp");
-				
-			// deleteはカートから削除処理
-			} else if (action.equals("delete")) {
-				HttpSession session = request.getSession(false);
-				if(session == null) { // セッションオブジェクトなし
-					request.setAttribute("message",
-							"セッションが切れています。もう一度トップページより操作してください。");
-					gotoPage(request, response, "/errInternal.jsp");
-					return;
-				}
-				CartBean cart = (CartBean)session.getAttribute("cart");
-				if(cart == null) { // カートがない
-					request.setAttribute("message", "正しく操作してください。");
-					gotoPage(request, response, "/errInternal.jsp");
-					return;
-				}
-				int code = Integer.parseInt(request.getParameter("item_code"));
-				cart.deleteCart(code);
-				gotoPage(request, response, "/cart.jsp");
-			} else { //actionの値が不正
+			HttpSession session = request.getSession(true);
+			CartBean bean = new CartBean(title, Integer.parseInt(price),Integer.parseInt(amount));
+			
+			@SuppressWarnings("unchecked")
+			List<CartBean> cart = (List<CartBean>)session.getAttribute("cart");
+			
+			if (cart == null) { // 初めてのクライアントの場合はカートを作成する
+				cart = new ArrayList<CartBean>();
+			}
+			cart.add(bean);
+			session.setAttribute("cart", cart);
+			gotoPage(request, response, "/cart.jsp");
+			
+		// deleteはカートから削除処理
+		} else if (action.equals("delete")) {
+			HttpSession session = request.getSession(false);
+			if(session == null) { // セッションオブジェクトなし
+				request.setAttribute("message",
+						"セッションが切れています。もう一度トップページより操作してください。");
+				gotoPage(request, response, "/errInternal.jsp");
+				return;
+			}
+			CartBean cart = (CartBean)session.getAttribute("cart");
+			if(cart == null) { // カートがない
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
+				return;
 			}
-		} catch (DAOException e) {
-			e.printStackTrace();
-			request.setAttribute("message", "内部エラーが発生しました。");
+			int code = Integer.parseInt(request.getParameter("item_code"));
+			//cart.deleteCart(code);
+			gotoPage(request, response, "/cart.jsp");
+		} else { //actionの値が不正
+			request.setAttribute("message", "正しく操作してください。");
 			gotoPage(request, response, "/errInternal.jsp");
 		}
 	}

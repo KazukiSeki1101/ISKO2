@@ -26,14 +26,14 @@
 	<td align="center">${item.value.name}</td>
 	<td align="right">${item.value.price}円</td>
 	<td align="right">
-	<select name="quantity">
+	<select name="amount">
 	<option value="1">1
 	<option value="2">2
 	<option value="3">3
 	<option value="4">4
 	<option value="5">5
 	</select></td>
-	<td align="right">${item.value.price * quantity}円</td>
+	<td align="right">${item.value.price * amount}円</td>
 <td>
 <form action="/ISKO2/CartServlet?action=delete" method="post">
 	<input type="hidden" name="item_code" value="${item.value.code}">
